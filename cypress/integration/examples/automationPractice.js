@@ -16,7 +16,7 @@ describe('UI fields', () => {
         cy.get('input[type=checkbox]').check(['option2', 'option3']);
     });
 
-    it.only('dropdowns', () => {
+    it('dropdowns', () => {
         cy.visit('https://rahulshettyacademy.com/AutomationPractice');
         
         // static
@@ -34,5 +34,27 @@ describe('UI fields', () => {
         });
 
         cy.get('#autocomplete').should('have.value', 'India');
+    });
+
+    it('visible, invisible elements', () => {
+        cy.visit('https://rahulshettyacademy.com/AutomationPractice');
+
+        cy.get('#displayed-text').should('be.visible');
+
+        cy.get ('#hide-textbox').click();
+
+        cy.get('#displayed-text').should('not.be.visible');
+
+        cy.get ('#show-textbox').click();
+
+        cy.get('#displayed-text').should('be.visible');
+    });
+
+    it.only('radiobutton', () => {
+        cy.visit('https://rahulshettyacademy.com/AutomationPractice');
+
+        cy.get('[value=radio2]')
+            .check()
+            .should('be.checked');
     });
 });
