@@ -19,9 +19,20 @@ describe('UI fields', () => {
     it.only('dropdowns', () => {
         cy.visit('https://rahulshettyacademy.com/AutomationPractice');
         
-        //static
+        // static
         cy.get('select')
             .select('option2')
             .should('have.value', 'option2');
+
+        // dynamic
+        cy.get('#autocomplete').type('ind');
+
+        cy.get('.ui-menu-item div').each((item) => {
+            if (item.text() === 'India') {
+                cy.wrap(item).click();
+            }
+        });
+
+        cy.get('#autocomplete').should('have.value', 'India');
     });
 });
