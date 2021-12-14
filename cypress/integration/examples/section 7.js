@@ -15,7 +15,7 @@ describe('Advance automation to handling Alerts, popups, Child Windows using Cyp
         });
     });
 
-    it.only('Child tab', () => {
+    it('Child tab', () => {
         cy.visit('https://rahulshettyacademy.com/AutomationPractice');
 
         cy.get('#opentab')
@@ -25,5 +25,23 @@ describe('Advance automation to handling Alerts, popups, Child Windows using Cyp
         cy.url().should('include', 'rahulshettyacademy');
         
         cy.go('back');
+    });
+
+    it.only('table', () => {
+        cy.visit('https://rahulshettyacademy.com/AutomationPractice');
+
+        cy.get('tr td:nth-child(2)').each((row, index) => {
+            const text = row.text();
+
+            if(text.includes('Python')) {
+                cy.get('tr td:nth-child(2)')
+                    .eq(index)
+                    .next()
+                    .then((price) => {
+                        const priceText = price.text();
+                        expect(priceText).to.equal('25');
+                    }); 
+            }
+        });
     });
 });
