@@ -1,3 +1,8 @@
+/// <reference types="cypress" />
+/// <reference types="cypress-iframe" />
+
+import 'cypress-iframe';
+
 describe('Understand how to automate frames & child windows in Cypress', () => {
     it('Child windows', () => {
         cy.visit('https://rahulshettyacademy.com/AutomationPractice');
@@ -7,5 +12,16 @@ describe('Understand how to automate frames & child windows in Cypress', () => {
 
             cy.visit('https://vk.com/');
         });
+    });
+
+    it.only('frames', () => {
+        cy.visit('https://rahulshettyacademy.com/AutomationPractice');
+        
+        cy.frameLoaded('#courses-iframe');
+
+        cy.iframe()
+            .find('a[href*="mentorship"]')
+            .eq(0)
+            .click();
     });
 });
