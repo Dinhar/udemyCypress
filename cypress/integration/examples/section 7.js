@@ -21,5 +21,9 @@ describe('Advance automation to handling Alerts, popups, Child Windows using Cyp
         cy.get('#opentab')
             .invoke('removeAttr', 'target')
             .click();
+
+        cy.url().should('include', 'rahulshettyacademy');
+        
+        cy.go('back');
     });
 });
