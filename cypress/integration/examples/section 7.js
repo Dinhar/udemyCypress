@@ -14,4 +14,12 @@ describe('Advance automation to handling Alerts, popups, Child Windows using Cyp
             expect(str).to.equal('Hello , Are you sure you want to confirm?');
         });
     });
+
+    it.only('Child tab', () => {
+        cy.visit('https://rahulshettyacademy.com/AutomationPractice');
+
+        cy.get('#opentab')
+            .invoke('removeAttr', 'target')
+            .click();
+    });
 });
